@@ -1,0 +1,43 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1; user-scalable=0;">
+        <link rel="stylesheet" href="style.css"/>
+        <title>The HTML5 Frogger</title>
+        <script src="AssetManager.js"></script>
+        <script src="Car.js"></script>
+        <script src="Frog.js"></script>
+        <script src="Background.js"></script>
+        <script src="GameObjectManager.js"></script>
+        <script src="CollisionManager.js"></script>
+        <script src="Main.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>Frogger: HTML5 powered</h1>
+        </header>
+        <div id="game">
+            <!-- width="1000px" height="500px" -->
+            <canvas width="1000px" height="500px" id="froggerGame">
+            </canvas>
+            <div id="descWindow">
+                <img src="PATH TO CROSS"/>
+                <h1>Frogger</h1>
+                <div id="descContent">
+                <div id="gamedesc">
+                    Game Desc
+                </div>
+                <div id="commands">
+                    Commandes
+                </div>
+                </div>
+            </div>
+        </div>
+        <audio src="sounds/headshot.mp3" id="boom"></audio>
+        <audio src="sounds/theme.mp3" id="theme" autoplay="true"></audio>
+        <footer>
+            <p>Copyright goes there etc</p>
+        </footer>
+    </body>
+</html>
