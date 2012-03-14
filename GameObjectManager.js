@@ -44,15 +44,21 @@ function GameObjectManager(){
     }
     
     this.draw = function(){
-        if(!this._collisionManager._collided){
+        if(!(this._collisionManager._collided || this._collisionManager._inWater)){
             this._backBufferContext.clearRect(0, 0, this._backBufferCanvas.width, this._backBufferCanvas.height);
             this._context.clearRect(0, 0, this._canvas.width, this._canvas.height);
             for(i in this._gameObjects) {
                 if(this._gameObjects[i].update)
                     this._gameObjects[i].update();
             }
-            if(this._collisionManager.colliding())
+            this._collisionManager.colliding();
+            this._collisionManager.winning();
+            
+            if(this._collisionManager._collided)
                 document.getElementById("boom").play();
+                
+            if(this._collisionManager._inWater)
+                document.getElementById("splash").play();
             
             for(i in this._gameObjects){
                 if(this._gameObjects[i].draw)
@@ -74,8 +80,9 @@ function GameObjectManager(){
                 this._gameObjects[i].keyDown(e);
         }
         //When there is a collision reset game by hitting space
-        if (this._collisionManager._collided && e.keyCode == 32){
+        if ((this._collisionManager._collided || this._collisionManager._inWater) && e.keyCode == 32){
             this._collisionManager._collided = false;
+            this._collisionManager._inWater = false;
             for(i in this._gameObjects) {
                 if(this._gameObjects[i].initPosition)
                     this._gameObjects[i].initPosition();

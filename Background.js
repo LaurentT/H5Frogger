@@ -1,16 +1,5 @@
 function Background(){
-    this._tiles=[
-                 ["G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G"],
-                 ["T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T"],
-                 ["B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B"],
-                 ["S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S"],
-                 ["T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T"],
-                 ["B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B"],
-                 ["S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S"],
-                 ["T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T"],
-                 ["B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B"],
-                 ["G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G"]
-                ];
+    this._tiles= null;
     this._backgroundCanvas = null;
     this._backgroundCanvasContext = null;
     this._Gimage = null;
@@ -21,6 +10,19 @@ function Background(){
     
     this.init = function(){
         var canvas = document.getElementById("froggerGame");
+        
+        this._tiles=[
+                 ["W","L","L","L","W","L","L","L","W","L","L","L","W","L","L","L","W","L","L","L"],
+                 ["T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T"],
+                 ["B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B"],
+                 ["S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S"],
+                 ["T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T"],
+                 ["B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B"],
+                 ["S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S","S"],
+                 ["T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T"],
+                 ["B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B"],
+                 ["G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G","G"]
+                ];
     
         //Initialize the background buffer
         this._backgroundCanvas = document.createElement("canvas");
@@ -33,7 +35,7 @@ function Background(){
         this._Timage = ASSET_MANAGER.getAsset('images/topRoad.png');
         this._Bimage = ASSET_MANAGER.getAsset('images/bottomRoad.png');
         this._Simage = ASSET_MANAGER.getAsset('images/sand.png');
-        this._Wimage = ASSET_MANAGER.getAsset('images/water.png');
+        this._Limage = ASSET_MANAGER.getAsset('images/water.png');
         
         //parse tiles
         for(var i=0; i<this._tiles.length; i++){
@@ -53,13 +55,17 @@ function Background(){
                         this._backgroundCanvasContext.drawImage(this._Simage, j*50, i*50)
                         break;
                     case "W":
-                        this._backgroundCanvasContext.drawImage(this._Wimage, j*50, i*50)
+                        this._backgroundCanvasContext.drawImage(this._Gimage, j*50, i*50)
+                        break;
+                    case "L":
+                        this._backgroundCanvasContext.drawImage(this._Limage, j*50, i*50)
                         break;
                 }
             }
             console.log("created one rowTile");
         }
         gGameObjectManager.add(this);
+        return this;
     }
     
     this.draw = function(){

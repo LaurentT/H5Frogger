@@ -24,7 +24,7 @@ function initFrogger() {
     //Initializes the gameObjectManager
     gGameObjectManager = new GameObjectManager().init();
     //Load all game elements we need in the game manager
-    new Background().init();
+    background = new Background().init();
     new Car().init("images/bluecar.png", "LEFT", 50);
     new Car().init("images/whitecar.png", "RIGHT", 100);
     
