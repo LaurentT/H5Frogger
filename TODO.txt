@@ -1,7 +1,5 @@
 * Sound Manager
 
-* Winning Zone
-
 * Screens
 
 * Loading bar
