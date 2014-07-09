@@ -44,27 +44,40 @@ function GameObjectManager(){
     }
     
     this.draw = function(){
-        if(!(this._collisionManager._collided || this._collisionManager._inWater)){
+        // Only update drawing if the frog is not dead or has not won yet
+        if(!(this._collisionManager._collided || this._collisionManager._inWater || this._collisionManager._won)){
             this._backBufferContext.clearRect(0, 0, this._backBufferCanvas.width, this._backBufferCanvas.height);
             this._context.clearRect(0, 0, this._canvas.width, this._canvas.height);
             for(i in this._gameObjects) {
                 if(this._gameObjects[i].update)
                     this._gameObjects[i].update();
             }
+            
             this._collisionManager.colliding();
             this._collisionManager.winning();
-            
+
             if(this._collisionManager._collided)
                 document.getElementById("boom").play();
                 
             if(this._collisionManager._inWater)
                 document.getElementById("splash").play();
+
+            if(this._collisionManager._won)
+                document.getElementById("boom").play();
             
             for(i in this._gameObjects){
                 if(this._gameObjects[i].draw)
                     this._gameObjects[i].draw();
             }
             this._context.drawImage(this._backBufferCanvas, 0, 0);
+        }
+
+        // In case the frog reached the safe area
+        if(this._collisionManager._won) {
+            this._context.textAlign = "center";
+            this._context.fillStyle = "white";
+            this._context.font = "default 200px sans-serif";
+            this._context.fillText("YOU WON :D", this._canvas.width/2, this._canvas.height/2);
         }
     }
     

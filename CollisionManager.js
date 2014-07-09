@@ -3,6 +3,7 @@ function CollisionManager(){
     this._player = null;
     this._collided = null;
     this._inWater = null;
+    this._won = null;
     
     this.init = function(){
         this._collided = false;
@@ -39,8 +40,12 @@ function CollisionManager(){
     this.winning = function(){
         xBgPos = this._player._x/50;
         yBgPos = this._player._y/50;
-        console.log("Current position of the frog on the background is: " + xBgPos + " and " + yBgPos);
-        console.log(background._tiles[yBgPos][xBgPos]);
+
+        // Checks if the frog is in the water
+        if(background._tiles[yBgPos][xBgPos] === "W") {
+            this._won = true;
+            return true;
+        }
     }
     
     this.horizontalCollision = function(obj){
